@@ -1,1 +1,10 @@
+# Ignore compiled class files
 *.class
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+
+# Exclude workspace-related files
+workspace.xml
