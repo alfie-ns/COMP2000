@@ -1,10 +1,6 @@
 #!/bin/bash
 
 # Enhanced Git Commit Importance Script
-# The script allows selective Git staging, customized importance levels with 
-# a message, and local backup of the Categories/ and prompts/ directories.
-
-# https://claude.ai/chat/3420f343-5909-49ab-93cc-ba5360bb51e0
 
 set -e  # Exit immediately if a command exits with a non-zero status
 
@@ -64,14 +60,12 @@ selective_add() {
     done
 }
 
-# Main Execution
-# 1. Exclude Categories/ from Git tracking; ignore messages for each file
-git rm -r --cached Categories/ 2>/dev/null || true # or true ensures contonuation even if the command fails
+# Main Execution --------------------------------------------
 
-# 2. Selectively add changes to staging area
+# 1. Selectively add changes
 selective_add
 
-# 3. Get commit importance and custom message
+# 2. Get commit importance and custom message
 print_bold "\nCommit importance:" >&2
 echo "1. Trivial" >&2
 echo "2. Minor" >&2
@@ -80,28 +74,19 @@ echo "4. Significant" >&2
 echo -e "5. Milestone\n" >&2
 commit_message=$(get_commit_details)
 
-# 4. Backup/Sync the Categories/ and prompts/ directories in parallel and ignore error messages
-if rsync -avh --update --delete "Categories/" "../../base/Categories/" > /dev/null 2>&1 & \
-   rsync -avh --update --delete "prompts/" "../../base/desktop-prompts/" > /dev/null 2>&1 & \
-   wait; then
-    print_bold "\nBackup completed; Categories/ and prompts/ directories synchronised and backed up.\n" >&2
-    
-    # 5. Commit and push changes
-    if git commit -m "$commit_message"; then
-        echo "Changes committed successfully" >&2
-        if git push origin main; then
-            echo -e '\nLocal repo pushed to remote origin\n' >&2
-            print_bold "Commit message: $commit_message" >&2
-            exit 0
-        else
-            echo "Error: Failed to push to remote. Check your network connection and try again." >&2
-            exit 1
-        fi
+
+# 3. Commit and push changes
+if git commit -m "$commit_message"; then
+    echo "Changes committed successfully" >&2
+    if git push origin main; then
+        echo -e '\nLocal repo pushed to remote origin\n' >&2
+        print_bold "Commit message: $commit_message" >&2
+        exit 0
     else
-        echo "Error: Failed to commit changes. Check Git configuration." >&2
+        echo "Error: Failed to push to remote..." >&2
         exit 1
     fi
 else
-    echo -e "\nFailed to back up Categories/ directory and prompts/; push aborted" >&2
+    echo "Error: Failed to commit changes..." >&2
     exit 1
 fi
