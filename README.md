@@ -1,1 +1,1 @@
-# 2000-CW
+# COMP2000 Studies and Coursework
