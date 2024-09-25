@@ -8,3 +8,6 @@
 
 # workspace-related files
 workspace.xml
+
+# Mac-specific files
+*.DS_Store
