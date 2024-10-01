@@ -1,4 +1,4 @@
-package year2_labs;
+package Lab1;
 
 public class fibonacci {
     public static void main(String[] args) {
