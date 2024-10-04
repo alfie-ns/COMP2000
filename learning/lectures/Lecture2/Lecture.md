@@ -1,3 +1,4 @@
+
 # COMP2000: Software Engineering 2 - Introduction to Java
 
 ## Outline
@@ -213,9 +214,42 @@ try {
 
 ### Wrapper Class Methods:
 
-- parseXxx() methods: Convert strings to primitive types
-- valueOf() methods: Return wrapper objects
-- xxxValue() methods: Return primitive values
+Where xxx represents the primitive type name (always lowercase):
+
+1. parseXxx() methods: Convert strings to primitive types
+
+   - Examples:
+     - Integer.parseInt()
+     - Double.parseDouble()
+     - Boolean.parseBoolean()
+   - Note: String doesn't have a parse method as it's already a reference type
+2. valueOf() methods: Return wrapper objects
+
+   - Examples:
+     - Integer.valueOf()
+     - Double.valueOf()
+     - Boolean.valueOf()
+     - String.valueOf() (works differently, converts other types to String)
+3. xxxValue() methods: Return primitive values from wrapper objects
+
+   - Examples:
+     - intValue()
+     - floatValue()
+     - doubleValue()
+     - booleanValue()
+   - Note: String is not a primitive type, so it doesn't have an xxxValue() method
+
+Important notes:
+
+- The xxx in xxxValue() always refers to the lowercase primitive type name (int, float, double, boolean, etc.)
+- String is a special case as it's not a primitive type:
+  - It doesn't have parseString() or stringValue() methods
+  - It has valueOf() method, but it works differently from primitive wrappers
+
+Additional common methods:
+
+- toString(): Converts the wrapper object to a String
+- compare(xxx a, xxx b): Compares two values of the type
 
 ## Conclusion
 
