@@ -5,12 +5,6 @@ class Stopwatch {
     public void stopwatch() {
         // Record the start time
         long startTime = System.nanoTime();
-        
-        // Simulate a task (for example, a simple loop)
-        for (int i = 0; i < 1000000; i++) {
-            // Simulating some task
-            int temp = i * i;
-        }
 
         // Record the end time
         long endTime = System.nanoTime();
